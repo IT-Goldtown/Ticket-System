@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket</title>
+</head>
+<body>
+    <h1>Ticket Information</h1>
+    <p><strong>Name:</strong> {{ name }}</p>
+    <p><strong>Issue:</strong> {{ issue }}</p>
+
+    {% if filename %}
+    <p><strong>Attached File:</strong> {{ filename }}</p>
+    {% else %}
+    <p>No file attached.</p>
+    {% endif %}
+</body>
+</html>

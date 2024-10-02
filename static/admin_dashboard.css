@@ -1,0 +1,56 @@
+body {
+    background-color: #001f4d; /* Dark blue background */
+    color: #00b8e6; /* Neon green text */
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+table {
+    width: 80%; /* Table width */
+    margin: 20px auto; /* Center table */
+    border-collapse: collapse; /* Collapse borders */
+}
+
+th, td {
+    padding: 10px; /* Padding for table cells */
+    border: 1px solid hsl(177, 100%, 50%); /* Neon green border */
+}
+
+.done {
+    background-color: rgb(5, 241, 5); /* Green for done */
+}
+
+.pending {
+    background-color: rgb(253, 253, 4); /* Yellow for pending */
+}
+
+.ongoing {
+    background-color: #02f4fc; /* sky blue for ongoing */
+}
+
+.unchecked {
+    background-color: rgb(255, 0, 0); /* Red for unchecked */
+}
+
+/* Animated Logout Button */
+a.logout {
+    display: inline-block; /* Make the link behave like a button */
+    padding: 15px 30px; /* Increased padding for a larger button */
+    font-size: 18px; /* Larger font size */
+    background-color: hsl(138, 100%, 50%); /* Neon green background */
+    color: #FFFFFF; /* White text for better contrast */
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    transition: transform 0.2s ease, background-color 0.3s ease; /* Animation effects */
+}
+
+/* Animation on hover */
+a.logout:hover {
+    transform: scale(1.1); /* Scale up on hover */
+    background-color: hsl(0, 100%, 50%); /* Darker green on hover */
+}
+

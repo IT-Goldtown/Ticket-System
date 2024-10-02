@@ -1,0 +1,150 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+body {
+    background-color: #202020; /* Dark blue background */
+    color: #00b8e6; /* Neon green text */
+    font-family: Arial, sans-serif;
+    text-align: center;
+    /* Add this to allow absolute positioning of child elements */
+}
+
+.content {
+    position: relative;
+    overflow: hidden;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+form {
+    margin: 20px auto;
+    display: inline-block; /* Center the form */
+}
+
+.name-box {
+    width: 50%; /* Smaller width for the name box */
+    height: 100px; /* Increase height */
+    padding: 10px;
+    margin: 5px auto; /* Center horizontally */
+    border: 2px solid #fffb00; /* Neon green border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.issue-box {
+    width: 100%; /* Increase width of the Issue box */
+    height: 400px; /* Increase height */
+    padding: 10px; /* Add some padding */
+    margin: 10px auto; /* Center horizontally */
+    border: 2px solid #fffb00; /* Neon green border */
+    background-color: #ffffff; /* White background for input */
+}
+
+input[type="text"], input[type="password"], textarea {
+    width: 100%; /* Full width for inputs */
+    padding: 10px;
+    margin: 5px 0;
+    border: 2px solid #fffb00; /* Neon green border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+input[type="submit"] {
+    background-color: #fffb00; /* Neon green button */
+    color: #001f4d; /* Dark blue text */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: transform 0.2s; /* Add transition for animation */
+}
+
+input[type="submit"]:active {
+    transform: scale(0.95); /* Scale down button on press */
+}
+
+.gear-icon {
+    position: absolute; /* Ensure the gear icon is positioned absolutely */
+    top: 10px; /* Space from the top */
+    right: 100px; /* Space from the right */
+    cursor: pointer;
+}
+
+.admin-login {
+    display: none; /* Hide admin login by default */
+    border: 2px solid #00ff00; /* Neon green border */
+    padding: 20px;
+    background-color: #001f4d; /* Dark blue background */
+    margin: 20px auto; /* Center the admin login */
+    width: 350px; /* Set width */
+    box-shadow: 0 0 10px #00ff00; /* Neon glow effect */
+}
+
+.admin-login h2 {
+    color: gold; /* Gold text for title */
+}
+
+.login-input {
+    width: 60%; /* Adjust width for login inputs */
+    margin: 0 auto; /* Center horizontally */
+    padding: 10px; /* Add some padding */
+    border: 2px solid #00ff00; /* Neon green border */
+    border-radius: 5px; /* Rounded corners */
+    display: block; /* Make input block to center */
+}
+
+#particles-js {
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+
+
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+      width: 100%;
+      margin-top: 0;
+    }
+  }
+
+  [class*="col-"] {
+    width: 100%;
+  }
+  
+  @media only screen and (min-width: 600px) {
+    /* For tablets: */
+    .col-s-1 {width: 8.33%;}
+    .col-s-2 {width: 16.66%;}
+    .col-s-3 {width: 25%;}
+    .col-s-4 {width: 33.33%;}
+    .col-s-5 {width: 41.66%;}
+    .col-s-6 {width: 50%;}
+    .col-s-7 {width: 58.33%;}
+    .col-s-8 {width: 66.66%;}
+    .col-s-9 {width: 75%;}
+    .col-s-10 {width: 83.33%;}
+    .col-s-11 {width: 91.66%;}
+    .col-s-12 {width: 100%;}
+  }
+  @media only screen and (min-width: 768px) {
+    /* For desktop: */
+    .col-1 {width: 8.33%;}
+    .col-2 {width: 16.66%;}
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
+  }

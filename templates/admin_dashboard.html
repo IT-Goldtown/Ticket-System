@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin_dashboard.css') }}">
+    <title>Admin Dashboard</title>
+    <style>
+        /* Existing styles... */
+        body {
+            background-color: #202020; /* Dark blue background */
+            color: #00b8e6; /* Neon green text */
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 80%; /* Table width */
+            margin: 20px auto; /* Center table */
+            border-collapse: collapse; /* Collapse borders */
+        }
+        /* For Table in admin dashboard*/
+        th, td {
+            padding: 10px; /* Padding for table cells */
+            border: 3px solid #5f5f5f; /* Neon green border */
+        }
+
+        /* Status styles */
+        .resolved { background-color: rgb(5, 241, 5); }
+        .pending { background-color: rgb(255, 136, 0); }
+        .on-going { background-color: #02f4fc; }
+        .unchecked { background-color: rgb(255, 0, 0); }
+
+        /* Logout Button */
+        a.logout {
+            display: inline-block; /* Make the link behave like a button */
+            padding: 15px 30px; /* Increased padding for a larger button */
+            font-size: 18px; /* Larger font size */
+            background-color: hsl(177, 100%, 50%); /* Neon green background */
+            color: #FFFFFF; /* White text for better contrast */
+            text-decoration: none; /* Remove underline */
+            border-radius: 5px; /* Rounded corners */
+            transition: transform 0.2s ease, background-color 0.3s ease; /* Animation effects */
+        }
+
+        /* Animation on hover */
+        a.logout:hover {
+            transform: scale(1.1); /* Scale up on hover */
+            background-color: hsl(177, 70%, 40%); /* Darker green on hover */
+        }
+
+        /* Row hover effect */
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
+        }
+
+        /* Search Bar */
+        #search {
+            margin-bottom: 20px; /* Space above search bar */
+        }
+
+        /* Message section */
+        .message {
+            margin: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function updateRowColor(select) {
+            const row = select.closest('tr');
+            row.className = '';  // Clear existing classes
+
+            switch (select.value) {
+                case 'Resolved':
+                    row.classList.add('Resolved');
+                    break;
+                case 'Pending':
+                    row.classList.add('Pending');
+                    break;
+                case 'On-going':
+                    row.classList.add('Ongoing');
+                    break;
+                case 'Unchecked':
+                    row.classList.add('Unchecked');
+                    break;
+            }
+        }
+
+        function confirmLogout() {
+            return confirm("Are you sure you want to logout?");
+        }
+    </script>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <form action="{{ url_for('clear_uploads') }}" method="POST" style="display:inline;">
+        <button type="submit" onclick="return confirm('Are you sure you want to clear all uploaded files? This action cannot be undone.');">Clear Uploads</button>
+    </form>
+    <form action="{{ url_for('clear_tickets') }}" method="POST" style="display:inline;">
+        <button type="submit" onclick="return confirm('Are you sure you want to clear all ticket documents? This action cannot be undone.');">Clear Tickets</button>
+    </form>
+    
+    <!-- Success/Error Messages -->
+    {% if message %}
+    <div class="message">{{ message }}</div>
+    {% endif %}
+    
+    <!-- Search Bar -->
+    <input type="text" id="search" placeholder="Search tickets..." onkeyup="searchTickets()">
+
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Issue</th>
+            <th>Status</th>
+            <th>Download</th>
+        </tr>
+        {% for ticket in tickets %}
+        <tr class="{{ ticket.status | lower }}">
+            <td>{{ ticket.name }}</td>
+            <td>{{ ticket.issue }}</td>
+            <td>
+                <form action="{{ url_for('update_status', ticket_id=ticket.id) }}" method="post">
+                    <select name="status">
+                        <option value="Unchecked" {% if ticket.status == 'Unchecked' %}selected{% endif %} class>Unchecked</option>
+                        <option value="Pending" {% if ticket.status == 'Pending' %}selected{% endif %}>Pending</option>
+                        <option value="On-going" {% if ticket.status == 'On-going' %}selected{% endif %}>On-going</option>
+                        <option value="Resolved" {% if ticket.status == 'Resolved' %}selected{% endif %}>Resolved</option>
+                    </select>
+                    <button type="submit">Update Status</button>
+                </form>
+            </td>
+            <td>
+                <a href="{{ url_for('download_ticket', filename=ticket.file_link) }}" class="download-button">Download DOCX</a>
+                <form action="{{ url_for('delete_ticket', ticket_id=ticket.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this ticket?');">
+                    <input type="submit" value="Delete" style="background-color: red; color: white;">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/logout" class="logout" onclick="return confirmLogout()">Logout</a>
+
+    <script>
+        function searchTickets() {
+            const input = document.getElementById('search');
+            const filter = input.value.toLowerCase();
+            const table = document.querySelector('table');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) { // Skip header row
+                const cells = rows[i].getElementsByTagName('td');
+                let found = false;
+
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j]) {
+                        const txtValue = cells[j].textContent || cells[j].innerText;
+                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+
+                rows[i].style.display = found ? '' : 'none'; // Show or hide row based on search
+            }
+        }
+    </script>
+</body>
+</html>

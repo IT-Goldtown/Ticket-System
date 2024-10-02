@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <title>Ticket Submission</title>
+    <style>
+        /* Additional styles to ensure the admin login is clickable */
+        .admin-login {
+            display: none; /* Initially hidden */
+            position: absolute; /* Positioning */
+            top: 70px; /* Adjust as needed */
+            left: 50%;
+            transform: translateX(-50%); /* Center it horizontally */
+            z-index: 1000; /* Make sure it's above other elements */
+            background: #001a41; /* Background for contrast */
+            padding: 20px; /* Padding for better appearance */
+            border: 1px solid #ccc; /* Border for distinction */
+            border-radius: 5px; /* Rounded corners */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js" class="canvas"></div>
+    
+    <div class="content">
+        <div class="gear-container">
+            <div class="gear" onclick="toggleAdminLogin()">&#9881;</div> <!-- Gear icon -->
+        </div>
+        <h1> IT Department</h1>
+        <h1>Ticketing System</h1>
+        <form action="/submit_ticket" method="POST" enctype="multipart/form-data">
+            <label for="name"> </label>
+            <input type="text" name="name" placeholder="Enter Employee Name" required><br><br>
+            <label for="issue"> </label>
+            <textarea name="issue" placeholder="Tell us what's the problem with details, you can provide images or screenshots." required></textarea><br><br>
+            <label for="file">Attach image file (PNG, JPG, JPEG, GIF, BMP):</label>
+            <input type="file" name="file" accept=".png, .jpg, .jpeg, .gif, .bmp"><br><br>
+            <input type="submit" value="Submit Ticket" onclick="alert('Ticket submitted successfully!')">
+        </form>
+    </div>
+
+    <!-- Admin login form -->
+    <div class="admin-login" id="admin-login">
+        <h2>Admin Login</h2>
+        <form action="/admin_login" method="POST">
+            <div class="credentials-tile">
+                <label for="username">Username:</label>
+                <input type="text" name="username" required><br>
+                <label for="password">Password:</label>
+                <input type="password" name="password" required><br>
+            </div>
+
+            <input type="submit" value="Login as Admin">
+        </form>
+    </div>
+
+    <script>
+        function toggleAdminLogin() {
+            var adminLogin = document.getElementById("admin-login");
+            if (adminLogin.style.display === "block") {
+                adminLogin.style.display = "none";
+            } else {
+                adminLogin.style.display = "block";
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 355,
+                    "density": {
+                        "enable": true,
+                        "value_area": 789.1476416322727
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.48927153781200905,
+                    "random": false,
+                    "anim": {
+                        "enable": true,
+                        "speed": 0.2,
+                        "opacity_min": 0,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 2,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": false,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 0.2,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "bubble"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 83.91608391608392,
+                        "size": 1,
+                        "duration": 3,
+                        "opacity": 1,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+    <!-- Footer -->
+    <footer>
+        <p style="text-align: center; margin-top: 20px; color: #FF6500;">Developed By: Lloyd Agonia</p>
+        <p style="text-align: center; margin-top: 20px; color: #FF6500;">Designed By: Neil Ian Zambrano</p>
+    </footer>
+</body>
+</html>
